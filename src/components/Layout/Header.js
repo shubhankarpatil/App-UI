@@ -1,13 +1,19 @@
+import { Link } from "react-router-dom";
 import "./Header.css";
 
 const Header = (props) => {
   return (
-    <>
-      <h1 className="header">Manthra</h1>
-      {/* <h2>Contact Us</h2>
-      <h2>About Us</h2>
-      <h2>Cart</h2> */}
-    </>
+    <header className="header">
+      <div className="brand">Manthra</div>
+      <nav className="navigation">
+        <Link to="/about">About Us</Link>
+        <Link to="/contact">Contact Us</Link>
+        <Link to="/cart" className="cart">
+          Cart
+        </Link>
+        <Link to="/franchise-enquiry">Franchise Enquiry</Link>
+      </nav>
+    </header>
   );
 };
 
