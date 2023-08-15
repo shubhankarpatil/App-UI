@@ -1,0 +1,34 @@
+.header1 {
+  font-family: "Montserrat", sans-serif;
+  color: #557a46;
+  width: fit-content;
+}
+
+.paragraph-container {
+  line-height: 1.5;
+  text-align: justify;
+}
+
+.paragraph {
+  margin-bottom: 1rem;
+}
+
+.contact-paragraph {
+  margin-bottom: 1rem;
+}
+
+.mobile-list {
+  list-style-type: none;
+  padding: 0;
+  margin-left: 1rem;
+}
+
+.mobile-item {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.header2 {
+  font-family: "Montserrat", sans-serif;
+  width: fit-content;
+}

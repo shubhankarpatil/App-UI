@@ -4,7 +4,10 @@ import "./Header.css";
 const Header = (props) => {
   return (
     <header className="header">
-      <div className="brand">Manthra</div>
+      <div className="brand">
+        <Link to="/" style={{ textDecoration: "none", color: "inherit", fontSize: "2.5rem" }}>Manthra</Link>
+      </div>
+
       <nav className="navigation">
         <Link to="/about">About Us</Link>
         <Link to="/contact">Contact Us</Link>
