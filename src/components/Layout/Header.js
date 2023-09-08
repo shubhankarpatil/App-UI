@@ -9,8 +9,9 @@ const Header = (props) => {
       </div>
 
       <nav className="navigation">
-        <Link to="/about">About Us</Link>
-        <Link to="/contact">Contact Us</Link>
+        {/* <Link to="/about">About Us</Link> */}
+        {/* <Link to="/contact">Contact Us</Link> */}
+        <Link>Recepies</Link> 
         <Link to="/cart" className="cart">
           Cart
         </Link>

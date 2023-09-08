@@ -12,7 +12,7 @@ const HomePage = (props) => {
         <h1>
           <div className="product-container">
             <div className="product-image">
-              <img src={cpco} alt="Cold Pressed Coconut Oil" />
+              <img src={cpco} alt="Cold Pressed Coconut Oil" loading="lazy" />
             </div>
             <div className="product-info">
               <div className="product-info-left">
@@ -60,7 +60,7 @@ const HomePage = (props) => {
                 >
                   Delivery within 2 business day
                 </p>
-                <button className="add-to-cart-button">Add to Bag</button>
+                <button className="add-to-cart-button">Add to Cart</button>
               </div>
             </div>
           </div>
@@ -69,7 +69,7 @@ const HomePage = (props) => {
         <h1>
           <div className="product-container">
             <div className="product-image">
-              <img src={BF} alt="Butter Fruit Image" />
+              <img src={BF} alt="Butter Fruit Image" loading="lazy" />
             </div>
             <div className="product-info">
               <div className="product-info-left">
@@ -117,7 +117,7 @@ const HomePage = (props) => {
                 >
                   Delivery within 2 business day
                 </p>
-                <button className="add-to-cart-button">Add to Bag</button>
+                <button className="add-to-cart-button">Add to Cart</button>
               </div>
             </div>
           </div>
@@ -126,7 +126,7 @@ const HomePage = (props) => {
         <h1>
           <div className="product-container">
             <div className="product-image">
-              <img src={DF} alt="Diced Dragon Fruit" />
+              <img src={DF} alt="Diced Dragon Fruit" loading="lazy" />
             </div>
             <div className="product-info">
               <div className="product-info-left">
@@ -175,7 +175,7 @@ const HomePage = (props) => {
                 >
                   Delivery within 2 business day
                 </p>
-                <button className="add-to-cart-button">Add to Bag</button>
+                <button className="add-to-cart-button">Add to Cart</button>
               </div>
             </div>
           </div>
@@ -184,7 +184,7 @@ const HomePage = (props) => {
         <h1>
           <div className="product-container">
             <div className="product-image">
-              <img src={CPGO} alt="Cold Pressed Groundnut Oil" />
+              <img src={CPGO} alt="Cold Pressed Groundnut Oil" loading="lazy" />
             </div>
             <div className="product-info">
               <div className="product-info-left">
@@ -233,7 +233,7 @@ const HomePage = (props) => {
                 >
                   Delivery within 2 business day
                 </p>
-                <button className="add-to-cart-button">Add to Bag</button>
+                <button className="add-to-cart-button">Add to cart</button>
               </div>
             </div>
           </div>

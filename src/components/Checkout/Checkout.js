@@ -32,9 +32,14 @@ const Checkout = () => {
     }
   };
 
-  const isInvalidName = (value) => /\d/.test(value) || /[!@#$%^&*()-,.?":{}|<>]/.test(value) || value.trim().length < 3;
-  const isInvalidAddress = (value) => value.trim() === "" || value.trim().length < 10;
-  const isInvalidMobile = (value) => value.trim() === "" || !/^[0-9]{10}$/.test(value);
+  const isInvalidName = (value) =>
+    /\d/.test(value) ||
+    /[!@#$%^&*()-,.?":{}|<>]/.test(value) ||
+    value.trim().length < 3;
+  const isInvalidAddress = (value) =>
+    value.trim() === "" || value.trim().length < 10;
+  const isInvalidMobile = (value) =>
+    value.trim() === "" || !/^[0-9]{10}$/.test(value);
 
   const submitData = async () => {
     try {
@@ -68,23 +73,6 @@ const Checkout = () => {
 
   return (
     <>
-      <div style={{ width: "fit-content" }}>
-        <h1 className="check-main">
-          <span>Billing Info</span>
-        </h1>
-        <span
-          style={{
-            fontFamily: "Poppins, sans-serif",
-            fontSize: "12px",
-            paddingTop: "0px",
-            color: "grey",
-            paddingLeft: "35px",
-            marginTop: "2px",
-          }}
-        >
-          Please enter your billing information
-        </span>
-      </div>
       <div style={{ display: "flex" }}>
         <Box // Left Box
           component="form"
@@ -97,6 +85,21 @@ const Checkout = () => {
             marginTop: "1rem",
           }}
         >
+          <h1 className="check-main">
+            <span>Billing Info</span>
+          </h1>
+          <span
+            className="below-billingInfo"
+            style={{
+              fontFamily: "Poppins, sans-serif",
+              fontSize: "12px",
+              paddingTop: "0px",
+              color: "grey",
+              marginTop: "2px",
+            }}
+          >
+            Please enter your billing information
+          </span>
           <div
             style={{
               display: "flex",

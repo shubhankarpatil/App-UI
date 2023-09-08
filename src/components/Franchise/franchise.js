@@ -35,15 +35,9 @@ const Franchise = () => {
     }
   };
 
-  const isInvalidName = (value) =>
-    /\d/.test(value) ||
-    /[!@#$%^&*()-,.?":{}|<>]/.test(value) ||
-    value.trim().length < 3;
-  const isInvalidMobile = (value) =>
-    value.trim() === "" || !/^[0-9]{10}$/.test(value);
-  const isInvalidEmail = (value) =>
-    value.trim() === "" ||
-    !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value);
+  const isInvalidName = (value) => /\d/.test(value) || /[!@#$%^&*()-,.?":{}|<>]/.test(value) || value.trim().length < 3;
+  const isInvalidMobile = (value) => value.trim() === "" || !/^[0-9]{10}$/.test(value);
+  const isInvalidEmail = (value) => value.trim() === "" || !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value);
 
   const submitData = async () => {
     try {
