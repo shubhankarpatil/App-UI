@@ -354,7 +354,6 @@ const Checkout = () => {
         <Box // Right Box
           sx={{
             width: "43%",
-            // backgroundColor: "lightgray",
             padding: "0 20px",
             display: "flex",
             flexDirection: "column",

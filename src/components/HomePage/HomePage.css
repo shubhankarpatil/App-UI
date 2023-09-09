@@ -5,9 +5,9 @@
 .product-container {
   display: flex;
   width: 80%;
-  margin: 0 auto; /* To center the content horizontally */
-  border: 2px solid #e0e0e0; /* Light gray border color */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle box shadow for depth */
+  margin: 0 auto;
+  border: 2px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding-top: 0px;
   height: 42vh;
   border-radius: 7px;
