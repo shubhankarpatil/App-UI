@@ -5,7 +5,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Check from "../HomePage/Images/Check.png";
+import Check from "../Images/Check.png";
 
 function SuccessPopUp({ open, onClose }) {
   return (
