@@ -1,30 +1,13 @@
 import React, { useState } from "react";
 import { Paper, Typography, IconButton, Snackbar, SnackbarContent } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-// import { useLocation } from "react-router-dom";
 import emptyCart from "../Images/Empty.png";
 import { useCart } from "../cartContext";
 
 const SummaryCart = () => {
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  // const [quantity, setQuantity] = useState(1);
-  const { cart, addToCart } = useCart();
-
-  // const handleIncrement = (productId) => {
-  //   const productToUpdate = cart.find((item) => item.productId === productId);
-  //   if (productToUpdate && productToUpdate.quantity < 3) {
-  //     // Create an updated product with the new quantity
-  //     const updatedProduct = {
-  //       ...productToUpdate,
-  //       quantity: productToUpdate.quantity + 1,
-  //     };
-  //     addToCart(updatedProduct);
-  //   } else {
-  //     setErrorMessage("You can only order 3 pieces per order.");
-  //     setSnackBarOpen(true);
-  //   }
-  // };
+  const { cart, addToCart, removeFromCart } = useCart();
 
   const handleIncrement = (productId) => {
     console.log('Cart increment', cart)
@@ -39,13 +22,14 @@ const SummaryCart = () => {
       }
       return item;
     });
-    console.log('Updated Cart', updatedCart)
     addToCart(updatedCart);
   };
 
   const handleDecrement = (productId) => {
     const updatedCart = cart.map((item) => {
+      console.log('item.quantity', item.productId, productId, item.quantity, item.title)
       if (item.productId === productId && item.quantity > 1) {
+        console.log('item.quantity inside', item.productId, productId, item.quantity, item.title)
         return { ...item, quantity: item.quantity - 1 };
       } else {
         setErrorMessage("Quantity cannot be less than 1.");
@@ -60,23 +44,18 @@ const SummaryCart = () => {
     setSnackBarOpen(false);
   };
 
+  const handleDelete = (productId) => {
+    removeFromCart(productId)
+  }
+
   return (
     <>
       {cart.length === 0 ? (
-        <img
-          alt="Empty cart"
-          src={emptyCart}
-          style={{ paddingTop: "2.7rem" }}
-        />
+        <img alt="Empty cart" src={emptyCart} style={{ paddingTop: "2.7rem" }} />
       ) : (
-        cart &&
-        cart.map((item, index) => (
-          <div
-            key={index}
-            style={{ marginBottom: "5px", paddingTop: "2.2rem" }}
-          >
-            <Paper
-              elevation={3}
+        cart && cart.map((item, index) => (
+          <div key={index} style={{ marginBottom: "5px", paddingTop: "2.2rem" }} >
+            <Paper elevation={3}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -88,10 +67,7 @@ const SummaryCart = () => {
               }}
             >
               <div style={{ display: "flex", alignItems: "flex-start" }}>
-                <img
-                  alt={item.title}
-                  src={item.image}
-                  loading="lazy"
+                <img alt={item.title} src={item.image} loading="lazy"
                   style={{
                     width: "100px",
                     height: "120px",
@@ -102,9 +78,7 @@ const SummaryCart = () => {
                 />
 
                 <div style={{ flex: 1, paddingTop: "5px", paddingLeft: "6px" }}>
-                  <Typography
-                    variant="h6"
-                    component="div"
+                  <Typography variant="h6" component="div"
                     style={{
                       fontFamily: "Montserrat, sans-serif",
                       fontWeight: "bold",
@@ -133,16 +107,11 @@ const SummaryCart = () => {
                     >
                       {item.quantity}
                     </Typography>
-                    <IconButton
-                      size="small"
-                      onClick={() => handleIncrement(item.productId)}
-                    >
+                    <IconButton size="small" onClick={() => handleIncrement(item.productId)} >
                       +
                     </IconButton>
                   </div>
-                  <Typography
-                    variant="body2"
-                    component="div"
+                  <Typography variant="body2" component="div"
                     style={{
                       paddingTop: "12px",
                       fontFamily: "Poppins, sans-serif",
@@ -156,7 +125,7 @@ const SummaryCart = () => {
               </div>
 
               <IconButton color="error">
-                <DeleteIcon />
+                <DeleteIcon onClick={() => handleDelete(item.productId)}/>
               </IconButton>
             </Paper>
 
