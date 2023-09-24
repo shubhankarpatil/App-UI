@@ -13,9 +13,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = (product) => {
-    console.log('Button clicked by', product.title)
     if (!isProductInCart(product.productId)) {
-      console.log('!isProductInCart(product.productId)', !isProductInCart(product.productId))
       addToCart(product);
       sessionStorage.setItem('cartItemAdded', 'true');
     } else {
