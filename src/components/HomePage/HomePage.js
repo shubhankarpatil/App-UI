@@ -1,11 +1,43 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import cpco from "./Images/CPCO.jpg";
-import BF from "./Images/BF.jpg";
-import DF from "./Images/DF.jpg";
-import CPGO from "./Images/CPGO.jpg"
+import cpco from "../Images/CPCO.jpg";
+import BF from "../Images/BF.jpg";
+import DF from "../Images/DF.jpg";
+import CPGO from "../Images/CPGO.jpg";
 import "./HomePage.css";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCart } from '../cartContext';
 
-const HomePage = (props) => {
+const HomePage = () => {
+  const { cart, addToCart, isProductInCart } = useCart();
+  const navigate = useNavigate();
+
+  const handleButtonClick = (product) => {
+    console.log('Button clicked by', product.title)
+    if (!isProductInCart(product.productId)) {
+      console.log('!isProductInCart(product.productId)', !isProductInCart(product.productId))
+      addToCart(product);
+      sessionStorage.setItem('cartItemAdded', 'true');
+    } else {
+      navigate('/cart');
+    }
+  };
+  
+  // useEffect(() => {
+  //   const cartItemAdded = sessionStorage.getItem('cartItemAdded');
+  //   if (cartItemAdded === 'true') {
+  //     const storedCart = JSON.parse(sessionStorage.getItem('cart'));
+  //     if (storedCart && storedCart.length > 0) {
+  //       console.log('Add to cart', addToCart, storedCart)
+  //       storedCart.forEach(product => addToCart(product));
+  //     }
+  //   }
+  // }, [addToCart]);
+
+  useEffect(() => {
+    sessionStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+  
   return (
     <>
       <div className="main">
@@ -60,7 +92,22 @@ const HomePage = (props) => {
                 >
                   Delivery within 2 business day
                 </p>
-                <button className="add-to-cart-button">Add to Cart</button>
+                <button
+                  className="add-to-cart-button"
+                  onClick={() => {
+                    const product = {
+                      productId: "1",
+                      title: "Cold Pressed Coconut Oil",
+                      price: "300",
+                      isCartEmpty: true,
+                      quantity: 1,
+                      image: '../Images/CPCO.jpg'
+                    };
+                    handleButtonClick (product);
+                  }}
+                >
+                  {isProductInCart("1") ? "View Cart" : "Add to Cart"}
+                </button>
               </div>
             </div>
           </div>
@@ -117,7 +164,22 @@ const HomePage = (props) => {
                 >
                   Delivery within 2 business day
                 </p>
-                <button className="add-to-cart-button">Add to Cart</button>
+                <button
+                  className="add-to-cart-button"
+                  onClick={() => {
+                    const product = {
+                      productId: "2",
+                      title: "Butter Fruit",
+                      price: "180",
+                      isCartEmpty: true,
+                      quantity: '1',
+                      image: '../Images/BF.jpg'
+                    };
+                    handleButtonClick (product);
+                  }}
+                >
+                  {isProductInCart("2") ? "View Cart" : "Add to Cart"}
+                </button>
               </div>
             </div>
           </div>
@@ -175,7 +237,22 @@ const HomePage = (props) => {
                 >
                   Delivery within 2 business day
                 </p>
-                <button className="add-to-cart-button">Add to Cart</button>
+                <button
+                  className="add-to-cart-button"
+                  onClick={() => {
+                    const product = {
+                      productId: "3",
+                      title: "Dragon Fruit",
+                      price: "180",
+                      isCartEmpty: true,
+                      quantity: '1',
+                      image: '../Images/DF.jpg'
+                    };
+                    handleButtonClick (product);
+                  }}
+                >
+                  {isProductInCart("3") ? "View Cart" : "Add to Cart"}
+                </button>
               </div>
             </div>
           </div>

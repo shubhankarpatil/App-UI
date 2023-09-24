@@ -1,144 +1,178 @@
 import React, { useState } from "react";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
+import { Paper, Typography, IconButton, Snackbar, SnackbarContent } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Snackbar from "@mui/material/Snackbar";
-import SnackbarContent from "@mui/material/SnackbarContent";
-import cpco from "../HomePage/Images/CPCO.jpg";
+// import { useLocation } from "react-router-dom";
+import emptyCart from "../Images/Empty.png";
+import { useCart } from "../cartContext";
 
-const SummaryCart = (props) => {
-  const [quantity, setQuantity] = useState(1);
+const SummaryCart = () => {
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [isPaperVisible, setIsPaperVisible] = useState(true);
-  const [baseAmount] = useState(300);
-  const [totalAmount, setTotalAmount] = useState(baseAmount);
+  // const [quantity, setQuantity] = useState(1);
+  const { cart, addToCart } = useCart();
 
+  // const handleIncrement = (productId) => {
+  //   const productToUpdate = cart.find((item) => item.productId === productId);
+  //   if (productToUpdate && productToUpdate.quantity < 3) {
+  //     // Create an updated product with the new quantity
+  //     const updatedProduct = {
+  //       ...productToUpdate,
+  //       quantity: productToUpdate.quantity + 1,
+  //     };
+  //     addToCart(updatedProduct);
+  //   } else {
+  //     setErrorMessage("You can only order 3 pieces per order.");
+  //     setSnackBarOpen(true);
+  //   }
+  // };
 
-  const handleIncrement = () => {
-    if (quantity < 3) {
-      setQuantity(quantity + 1);
-      setTotalAmount(baseAmount * (quantity + 1));
-    } else {
-      setErrorMessage("You can only order 3 pieces per order.");
-      setSnackBarOpen(true);
-    }
+  const handleIncrement = (productId) => {
+    console.log('Cart increment', cart)
+    const updatedCart = cart.map((item) => {
+      console.log('item.quantity', item.productId, productId, item.quantity, item.title)
+      if (item.productId === productId && item.quantity < 3) {
+        console.log('item.quantity inside', item.productId, productId, item.quantity, item.title)
+        return { ...item, quantity: item.quantity + 1 };
+      } else {
+        setErrorMessage("You can only order 3 pieces per order.");
+        setSnackBarOpen(true);
+      }
+      return item;
+    });
+    console.log('Updated Cart', updatedCart)
+    addToCart(updatedCart);
   };
 
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-      setTotalAmount(baseAmount * (quantity - 1));
-    } else {
-      setErrorMessage("Quantity cannot be less than 1.");
-      setSnackBarOpen(true);
-    }
+  const handleDecrement = (productId) => {
+    const updatedCart = cart.map((item) => {
+      if (item.productId === productId && item.quantity > 1) {
+        return { ...item, quantity: item.quantity - 1 };
+      } else {
+        setErrorMessage("Quantity cannot be less than 1.");
+        setSnackBarOpen(true);
+      }
+      return item;
+    });
+    addToCart(updatedCart);
   };
 
   const handleCloseSnackBar = () => {
     setSnackBarOpen(false);
   };
 
-  const handleDelete = () => {
-    setIsPaperVisible(false); // Set the visibility to false when delete is clicked
-  };
-
   return (
     <>
-      {isPaperVisible && (
-        <div style={{ marginBottom: "20px" }}>
-          <Paper
-            elevation={3}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              padding: "10px",
-              marginBottom: "10px",
-              height: "130px",
-              flexDirection: "row",
-            }}
+      {cart.length === 0 ? (
+        <img
+          alt="Empty cart"
+          src={emptyCart}
+          style={{ paddingTop: "2.7rem" }}
+        />
+      ) : (
+        cart &&
+        cart.map((item, index) => (
+          <div
+            key={index}
+            style={{ marginBottom: "5px", paddingTop: "2.2rem" }}
           >
-            <div style={{ display: "flex", alignItems: "flex-start" }}>
-              <img
-                alt="title"
-                src={cpco}
-                loading="lazy"
-                style={{
-                  width: "100px",
-                  height: "120px",
-                  marginRight: "10px",
-                  padding: "5px",
-                  borderRadius: "12px",
-                }}
-              />
+            <Paper
+              elevation={3}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "10px",
+                marginBottom: "10px",
+                height: "130px",
+                flexDirection: "row",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "flex-start" }}>
+                <img
+                  alt={item.title}
+                  src={item.image}
+                  loading="lazy"
+                  style={{
+                    width: "100px",
+                    height: "120px",
+                    marginRight: "10px",
+                    padding: "5px",
+                    borderRadius: "12px",
+                  }}
+                />
 
-              <div style={{ flex: 1, paddingTop: "5px", paddingLeft: "6px" }}>
-                <Typography
-                  variant="h6"
-                  component="div"
-                  style={{
-                    fontFamily: "Montserrat, sans-serif",
-                    fontWeight: "bold",
-                    paddingTop: "5px",
-                  }}
-                >
-                  Cold Pressed Coconut Oil
-                </Typography>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    paddingTop: "14px",
-                  }}
-                >
-                  <IconButton size="small" onClick={handleDecrement}>
-                    -
-                  </IconButton>
+                <div style={{ flex: 1, paddingTop: "5px", paddingLeft: "6px" }}>
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    style={{
+                      fontFamily: "Montserrat, sans-serif",
+                      fontWeight: "bold",
+                      paddingTop: "5px",
+                    }}
+                  >
+                    {item.title}
+                  </Typography>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      paddingTop: "14px",
+                    }}
+                  >
+                    <IconButton
+                      size="small"
+                      onClick={() => handleDecrement(item.productId)}
+                    >
+                      -
+                    </IconButton>
+                    <Typography
+                      variant="body2"
+                      component="div"
+                      style={{ margin: "0 10px" }}
+                    >
+                      {item.quantity}
+                    </Typography>
+                    <IconButton
+                      size="small"
+                      onClick={() => handleIncrement(item.productId)}
+                    >
+                      +
+                    </IconButton>
+                  </div>
                   <Typography
                     variant="body2"
                     component="div"
-                    style={{ margin: "0 10px" }}
+                    style={{
+                      paddingTop: "12px",
+                      fontFamily: "Poppins, sans-serif",
+                      fontWeight: "bold",
+                      fontSize: "18px",
+                    }}
                   >
-                    {quantity}
+                    Rs {item.price * item.quantity}
                   </Typography>
-                  <IconButton size="small" onClick={handleIncrement}>
-                    +
-                  </IconButton>
                 </div>
-                <Typography
-                  variant="body2"
-                  component="div"
-                  style={{
-                    paddingTop: "12px",
-                    fontFamily: "Poppins, sans-serif",
-                    fontWeight: "bold",
-                    fontSize: "18px",
-                  }}
-                >
-                  Rs {totalAmount}
-                </Typography>
               </div>
-            </div>
 
-            <IconButton color="error" onClick={handleDelete}>
-              <DeleteIcon />
-            </IconButton>
-          </Paper>
+              <IconButton color="error">
+                <DeleteIcon />
+              </IconButton>
+            </Paper>
 
-          <Snackbar
-            open={snackBarOpen}
-            autoHideDuration={4000}
-            onClose={handleCloseSnackBar}
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-          >
-            <SnackbarContent
-              sx={{ backgroundColor: "#2ecc71" }}
-              message={errorMessage}
-            />
-          </Snackbar>
-        </div>
+            <Snackbar
+              open={snackBarOpen}
+              autoHideDuration={4000}
+              onClose={handleCloseSnackBar}
+              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            >
+              <SnackbarContent
+                sx={{ backgroundColor: "#2ecc71" }}
+                message={errorMessage}
+              />
+            </Snackbar>
+          </div>
+        ))
       )}
     </>
   );
