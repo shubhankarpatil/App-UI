@@ -24,40 +24,42 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (product) => {
     setCartItemAdded(true);
-
+  
     setCart((prevCart) => {
-      console.log('prevCart', prevCart, product.productId, product)
       const productsToAdd = Array.isArray(product) ? product : [product];
-      // const existingProductIndex = prevCart.findIndex((item) => item.productId === product.productId);
-      // const existingProductIndex = prevCart.findIndex((item) => {
-      //   return productsToAdd.some((productItem) => item.productId === productItem.productId);
-      // });
-      const existingProductIndex = productsToAdd.map((productItem) => {
-        return prevCart.findIndex((item) => item.productId === productItem.productId);
-      });      
-      console.log('existingProductIndex', existingProductIndex, prevCart[existingProductIndex])
-
-      // if (existingProductIndex !== -1 && prevCart[existingProductIndex]?.quantity < 3) {
-      if (!existingProductIndex.includes(-1) && prevCart[existingProductIndex]?.quantity < 3) {
-        const updatedCart = [...prevCart];
-        updatedCart[existingProductIndex].quantity++;
-        return updatedCart;
-      // if (!existingProductIndex.includes(-1) && existingProductIndex.every((index) => prevCart[index].quantity < 3)) {
-        //   const updatedCart = [...prevCart];
-        //   existingProductIndex.forEach((index) => { updatedCart[index].quantity++; });
-        // return updatedCart;
-      } else if (existingProductIndex.includes(-1)) {
-        return [...prevCart, { ...product, quantity: 1 }];
-      }
-      return prevCart;
+  
+      const updatedCart = prevCart.map((item) => {
+        const productToUpdate = productsToAdd.find((productItem) => item.productId === productItem.productId);
+  
+        if (productToUpdate && productToUpdate.quantity <= 3) {
+          return { ...item, quantity: productToUpdate.quantity };
+        }
+  
+        return item;
+      });
+  
+      productsToAdd.forEach((productItem) => {
+        if (!updatedCart.some((item) => item.productId === productItem.productId) && productItem.quantity <= 3) {
+          updatedCart.push({ ...productItem, quantity: 1 });
+        }
+      });
+      return updatedCart;
     });
     sessionStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
   };
   
   const isProductInCart = (productId) => cart.some((item) => item.productId === productId);
 
+  const removeFromCart = (productId) => {
+    setCart((prevCart) => {
+      const updatedCart = prevCart.filter((item) => item.productId !== productId);
+      sessionStorage.setItem(CART_STORAGE_KEY, JSON.stringify(updatedCart));
+      return updatedCart;
+    });
+  };
+
   return (
-    <CartContext.Provider value={{ cart, cartItemAdded, addToCart, isProductInCart }}>
+    <CartContext.Provider value={{ cart, cartItemAdded, addToCart, isProductInCart, removeFromCart }}>
       {children}
     </CartContext.Provider>
   );
