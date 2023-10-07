@@ -1,0 +1,51 @@
+  .scrollable-container {
+    padding-top: 1.9rem;
+    max-height: 26rem;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .scrollable-inner {
+    max-height: 100%;
+    overflow: hidden;
+  }
+  
+  .scrollable-inner:hover {
+    overflow-y: auto;
+  }
+  
+  .scrollable-inner::-webkit-scrollbar {
+    width: .4rem;
+  }
+  
+  .scrollable-inner::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 5px;
+  }  
+  
+  .total-amount {
+    padding-top: 1.8rem;
+  }
+
+  .total-amount-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3.2rem;
+    padding: 0 1.4rem;
+    background-color: #a2ff86;  
+    border-radius: .7rem;
+    width: 75%;
+    margin-left: 2.6rem;
+  }
+  
+  .total-amount-label {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+  }
+  
+  .total-amount-value {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 22px;
+  }
+  
