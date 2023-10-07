@@ -18,10 +18,6 @@ export const CartProvider = ({ children }) => {
     }
   }, []);
 
-//   useEffect(() => {
-//     sessionStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
-//   }, []);
-
   const addToCart = (product) => {
     setCartItemAdded(true);
   
