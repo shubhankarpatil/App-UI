@@ -99,7 +99,7 @@ const HomePage = () => {
                       price: "300",
                       isCartEmpty: true,
                       quantity: 1,
-                      image: '../Images/CPCO.jpg'
+                      image: cpco
                     };
                     handleButtonClick (product);
                   }}
@@ -171,7 +171,7 @@ const HomePage = () => {
                       price: "180",
                       isCartEmpty: true,
                       quantity: '1',
-                      image: '../Images/BF.jpg'
+                      image: BF
                     };
                     handleButtonClick (product);
                   }}
@@ -244,7 +244,7 @@ const HomePage = () => {
                       price: "180",
                       isCartEmpty: true,
                       quantity: '1',
-                      image: '../Images/DF.jpg'
+                      image: DF
                     };
                     handleButtonClick (product);
                   }}
@@ -263,8 +263,8 @@ const HomePage = () => {
             </div>
             <div className="product-info">
               <div className="product-info-left">
-                <h2>Cold Pressed Groundnut Oil</h2>
-                <p>Organically cold pressed groundnut oil</p>
+                <h2>Wood Pressed Groundnut Oil</h2>
+                <p>Organic groudnut wood pressed oil</p>
                 <div className="product-fields">
                   <p style={{ paddingTop: "0px", marginBottom: "7px" }}>
                     <span className="label"> Freshness</span>:{" "}
@@ -308,7 +308,20 @@ const HomePage = () => {
                 >
                   Delivery within 2 business day
                 </p>
-                <button className="add-to-cart-button">Add to cart</button>
+                <button className="add-to-cart-button"
+                onClick={() => {
+                  const product = {
+                    productId: "4",
+                    title: "Wood Pressed Groundnut Oil",
+                    price: "300",
+                    isCartEmpty: true,
+                    quantity: '1',
+                    image: CPGO
+                  };
+                  handleButtonClick (product);
+                }}>
+                  {isProductInCart("4") ? "View Cart" : "Add to Cart"}
+                </button>
               </div>
             </div>
           </div>
