@@ -20,17 +20,6 @@ const HomePage = () => {
       navigate('/cart');
     }
   };
-  
-  // useEffect(() => {
-  //   const cartItemAdded = sessionStorage.getItem('cartItemAdded');
-  //   if (cartItemAdded === 'true') {
-  //     const storedCart = JSON.parse(sessionStorage.getItem('cart'));
-  //     if (storedCart && storedCart.length > 0) {
-  //       console.log('Add to cart', addToCart, storedCart)
-  //       storedCart.forEach(product => addToCart(product));
-  //     }
-  //   }
-  // }, [addToCart]);
 
   useEffect(() => {
     sessionStorage.setItem('cart', JSON.stringify(cart));
