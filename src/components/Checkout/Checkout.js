@@ -7,6 +7,7 @@ import SummaryCart from "../SummaryCart/SummaryCart.js";
 import FormHelperText from "@mui/material/FormHelperText";
 import SuccessPopUp from "../PopUps/Success";
 import FailurePopUp from "../PopUps/Failure";
+import { useCart } from "../cartContext"
 
 const Checkout = () => {
   const [textFieldValues, setTextFieldValues] = useState({
@@ -21,6 +22,7 @@ const Checkout = () => {
     address: false,
     mobile: false,
   });
+  const { cart } = useCart();
   const [showSuccessPopUp, setShowSuccessPopUp] = useState(false);
   const [showFailurePopUp, setShowFailurePopUp] = useState(false);
 
@@ -43,7 +45,17 @@ const Checkout = () => {
 
   const submitData = async () => {
     try {
-      console.log("http://localhost:3000/submit/data", textFieldValues);
+      const orderData = {
+        user: {
+          firstName: textFieldValues.firstName,
+          lastName: textFieldValues.lastName,
+          address: textFieldValues.address,
+          mobile: textFieldValues.mobile,
+        },
+        cart: cart,
+        paymentStatus: "unpaid"
+      }
+      console.log("http://localhost:3000/submit/data", textFieldValues, cart, orderData);
       const response = await axios.post(
         "http://localhost:3000/submit/data",
         textFieldValues
@@ -68,13 +80,14 @@ const Checkout = () => {
       }
     } catch (error) {
       console.log("Error while submitting data", error);
+      setShowFailurePopUp(true);
     }
   };
 
   return (
     <>
       <div style={{ display: "flex" }}>
-        <Box // Left Box
+        <Box
           component="form"
           sx={{
             width: "57%",
@@ -337,13 +350,15 @@ const Checkout = () => {
           </div>
           <Button
             variant="contained"
-            color="success"
-            sx={{ marginTop: "3rem" }}
+            sx={{ marginTop: "3rem", backgroundColor: "#a2ff86", color: 'black', fontWeight: 'bold', "&:hover": {
+              backgroundColor: "#87e567",
+            },}}
             disabled={
               isInvalidName(textFieldValues.firstName) ||
               isInvalidName(textFieldValues.lastName) ||
               isInvalidAddress(textFieldValues.address) ||
-              isInvalidMobile(textFieldValues.mobile)
+              isInvalidMobile(textFieldValues.mobile) ||
+              cart.length === 0
             }
             onClick={submitData}
           >
