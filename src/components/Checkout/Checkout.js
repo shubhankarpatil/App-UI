@@ -118,7 +118,7 @@ const Checkout = () => {
               display: "flex",
               width: "100%",
               marginBottom: "3rem",
-              marginTop: "1rem",
+              marginTop: "1rem"
             }}
           >
             <Stack spacing={6} direction="row" sx={{ flex: 1 }}>
@@ -139,7 +139,7 @@ const Checkout = () => {
                       color: "red",
                       fontFamily: "Poppins, sans-serif",
                       fontSize: ".8rem",
-                      fontWeight: "bold",
+                      fontWeight: "bold"
                     }}
                   >
                     {touched.firstName &&
@@ -182,7 +182,7 @@ const Checkout = () => {
                       color: "red",
                       fontFamily: "Poppins, sans-serif",
                       fontSize: ".8rem",
-                      fontWeight: "bold",
+                      fontWeight: "bold"
                     }}
                   >
                     {touched.lastName &&
@@ -229,7 +229,7 @@ const Checkout = () => {
                       color: "red",
                       fontFamily: "Poppins, sans-serif",
                       fontSize: ".8rem",
-                      fontWeight: "bold",
+                      fontWeight: "bold"
                     }}
                   >
                     {touched.address &&
@@ -275,7 +275,7 @@ const Checkout = () => {
                       color: "red",
                       fontFamily: "Poppins, sans-serif",
                       fontSize: ".8rem",
-                      fontWeight: "bold",
+                      fontWeight: "bold"
                     }}
                   >
                     {touched.mobile &&

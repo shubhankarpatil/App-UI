@@ -131,7 +131,7 @@ const Franchise = () => {
               display: "flex",
               width: "100%",
               marginBottom: "3rem",
-              marginTop: "1rem",
+              marginTop: "1rem"
             }}
           >
             <Stack spacing={6} direction="row" sx={{ flex: 1 }}>
