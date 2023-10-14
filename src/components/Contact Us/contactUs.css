@@ -1,14 +1,15 @@
 .tooltip {
   position: absolute;
-  background: #a2ff86; /* Transparent background */
-  border-radius: 10px; /* Rounded corners */
+  background: #a2ff86; 
+  border-radius: 10px;
   padding: 10px;
   z-index: 1;
-  top: 5rem; /* Adjust the distance from the top */
+  top: 5rem;
 }
 
 .tooltip div {
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
+  margin-top: -1rem;
   cursor: pointer;
 }
 
