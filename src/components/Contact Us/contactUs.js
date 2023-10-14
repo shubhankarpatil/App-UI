@@ -16,7 +16,7 @@ const ContactUs = () => {
 
   const handleContactClick = (contactMethod) => {
     if (contactMethod === 'email') {
-      window.location.href = 'mailto:example@example.com';
+      window.location.href = 'mailto:manthrafoods@gmail.com';
     } else if (contactMethod === 'mobile') {
       window.location.href = 'tel:+1234567890';
     }
@@ -42,7 +42,7 @@ const ContactUs = () => {
             <CallRoundedIcon fontSize='small' style={{ marginRight: '.5rem' }} /> 123456789
           </div>
           <div onClick={() => handleContactClick('mobile')} style={{ cursor: 'pointer', color: "black", fontSize: "1rem", display: 'flex', alignItems: 'center' }}>
-          <EmailRoundedIcon fontSize='small' style={{ marginRight: '.5rem' }} /> manthra@gmail.com
+          <EmailRoundedIcon fontSize='small' style={{ marginRight: '.5rem' }} /> manthrafoods@gmail.com
           </div>
         </div>
       )}

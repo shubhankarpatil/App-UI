@@ -17,12 +17,3 @@ div:hover .tooltip {
   display: block;
   text-decoration: none;
 }
-
-/* .main-div {
-    cursor: 'pointer';
-    height: 'inherit';
-    display: 'flex';
-    flex-direction: 'column';
-    align-items: 'center';
-    justify-content: 'center';
-} */
