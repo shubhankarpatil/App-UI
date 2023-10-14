@@ -53,9 +53,9 @@ const Footer = () => {
           <EmailRoundedIcon fontSize="small" style={{cursor: 'pointer'}} onClick={() => handleContactClick('email')}/>
           <p style={{ marginLeft: '.7rem', cursor: 'pointer' }} onClick={() => handleCopy('manthrafoods@gmail.com')}>manthrafoods@gmail.com</p>
          </div>
-         <Snackbar open={snackBarOpen} autoHideDuration={4000} onClose={handleCloseSnackBar} anchorOrigin={{ vertical: "bottom", horizontal: "center" }}>
-            <SnackbarContent sx={{ backgroundColor: "#2ecc71" }} message={message} />
-          </Snackbar>
+        <Snackbar open={snackBarOpen} autoHideDuration={2000} onClose={handleCloseSnackBar} anchorOrigin={{ vertical: "bottom", horizontal: "center" }}>
+          <SnackbarContent sx={{ backgroundColor: "#2ecc71" }} message={message} />
+        </Snackbar>
       </div>
     </footer>
   );
