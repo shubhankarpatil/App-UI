@@ -15,12 +15,14 @@ const Checkout = () => {
     lastName: "",
     address: "",
     mobile: "",
+    email: "",
   });
   const [touched, setTouched] = useState({
     firstName: false,
     lastName: false,
     address: false,
     mobile: false,
+    email: false,
   });
   const { cart } = useCart();
   const [showSuccessPopUp, setShowSuccessPopUp] = useState(false);
@@ -42,6 +44,7 @@ const Checkout = () => {
     value.trim() === "" || value.trim().length < 10;
   const isInvalidMobile = (value) =>
     value.trim() === "" || !/^[0-9]{10}$/.test(value);
+  const isInvalidEmail = (value) => value.trim() === "" || value.trim().length < 15 || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
 
   const submitData = async () => {
     try {
@@ -51,6 +54,7 @@ const Checkout = () => {
           lastName: textFieldValues.lastName,
           address: textFieldValues.address,
           mobile: textFieldValues.mobile,
+          email: textFieldValues.email
         },
         cart: cart,
         paymentStatus: "unpaid"
@@ -68,12 +72,14 @@ const Checkout = () => {
           lastName: "",
           address: "",
           mobile: "",
+          email: ""
         });
         setTouched({
           firstName: false,
           lastName: false,
           address: false,
           mobile: false,
+          email: false
         });
       } else if (response.status === 500) {
         setShowFailurePopUp(true);
@@ -304,6 +310,45 @@ const Checkout = () => {
           <div style={{ display: "flex", width: "100%", marginBottom: "8px" }}>
             <Stack spacing={6} direction="row" sx={{ flex: 1 }}>
               <TextField
+                variant="outlined"
+                color="success"
+                label="Email id"
+                required
+                value={textFieldValues.email}
+                onChange={handleChange}
+                name='email'
+                error={touched.email && isInvalidEmail(textFieldValues.email)}
+                helperText={
+                  <FormHelperText
+                    style={{
+                      color: "red",
+                      fontFamily: "Poppins, sans-serif",
+                      fontSize: ".8rem",
+                      fontWeight: "bold"
+                    }}
+                  >
+                    {touched.email &&
+                      (isInvalidEmail(textFieldValues.email)
+                        ? "Please enter a valid email id"
+                        : "")}
+                  </FormHelperText>
+                }
+                sx={{
+                  flex: 1,
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "black",
+                    },
+                  },
+                }}
+                InputLabelProps={{
+                  style: {
+                    color: "black",
+                    fontWeight: "bolder",
+                  },
+                }}
+              />
+              <TextField
                 type="text"
                 variant="outlined"
                 color="success"
@@ -325,27 +370,6 @@ const Checkout = () => {
                   },
                 }}
               />
-              <TextField
-                variant="outlined"
-                color="success"
-                label="Postal Code"
-                defaultValue="560068"
-                disabled
-                sx={{
-                  flex: 1,
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": {
-                      borderColor: "black",
-                    },
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    color: "black",
-                    fontWeight: "bolder",
-                  },
-                }}
-              />
             </Stack>
           </div>
           <Button
@@ -358,6 +382,7 @@ const Checkout = () => {
               isInvalidName(textFieldValues.lastName) ||
               isInvalidAddress(textFieldValues.address) ||
               isInvalidMobile(textFieldValues.mobile) ||
+              isInvalidEmail(textFieldValues.email) ||
               cart.length === 0
             }
             onClick={submitData}
