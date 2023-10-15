@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Header from "./components/Header/Header.js";
-import Footer from './components/Footer/footer.js'
+import Footer from './components/Footer/footer.js';
 import "./App.css";
 
 const HomePage = React.lazy(() => import("./components/HomePage/HomePage.js"));
